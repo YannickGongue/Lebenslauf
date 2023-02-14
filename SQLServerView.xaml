@@ -1,0 +1,225 @@
+﻿<Window x:Class="EngineeringToolsCV_1.Views.SQLServerView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EngineeringToolsCV_1.Views" xmlns:Controls="clr-namespace:EngineeringToolsCV_1"
+        mc:Ignorable="d"
+        Height="450" 
+        Width="550"
+        WindowState="Normal" 
+        WindowStartupLocation="CenterScreen" 
+        WindowStyle="None">
+
+        <Window.Resources>
+            <Style x:Key="LabelStyle" TargetType="Label">
+                <Setter Property="Width" Value="250"/>
+                <Setter Property="Height" Value="50"/>
+                <Setter Property="FontSize" Value="30"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="TextBoxStyle" TargetType="TextBox">
+                <Setter Property="Width" Value="250"/>
+                <Setter Property="Height" Value="30"/>
+                <Setter Property="BorderBrush" Value="Gray"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="TextBlockStyle" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="Width" Value="200"/>
+                <Setter Property="Height" Value="30"/>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="true">
+                        <Setter Property="FontWeight" Value="Bold"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Window.Resources>
+        <Grid Background="AliceBlue">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="80" />
+
+
+        </Grid.RowDefinitions>
+            <TextBlock 
+                Text="Verbindung mit Server herstellen" 
+                Width="250" Height="30" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                FontSize="15" 
+                Margin="5,5,0,0"/>
+            <local:ucRoundButton
+                Grid.Column="1" 
+                VerticalAlignment="Top"
+                HorizontalAlignment="Right" 
+                Margin="0,0,3,0" 
+                Background="Red"
+                Width="30" Height="30" 
+                CornerRadius="27" 
+                Click="CloseButton_Click"/>
+            <local:ucRoundButton 
+                Grid.Column="1"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Right"  
+                Margin="0,0,32,0"
+                Background="Yellow" 
+                Width="30" Height="30"
+                CornerRadius="27" 
+                Click="MinimizeButton_Click"/>
+            <local:ucRoundButton
+                Grid.Column="1" 
+                VerticalAlignment="Top" 
+                HorizontalAlignment="Right" 
+                Margin="0,0,60,0"
+                Background="Green" 
+                Width="30" 
+                Height="30"
+                CornerRadius="27" 
+                Click="MaximizeButton_Click" />
+            <Label
+                Style="{StaticResource LabelStyle}" 
+                Grid.Column="0" 
+                Grid.Row="1" 
+                Content="serverType :" 
+                Margin="5,0,0,49" 
+                Grid.RowSpan="2" 
+                VerticalAlignment="Bottom"/>
+            <Label 
+                Style="{StaticResource LabelStyle}" 
+                Grid.Column="0" 
+                Grid.Row="2" 
+                Content="servername :"
+                Margin="5,2,0,0"/>
+            <Label 
+                Style="{StaticResource LabelStyle}"
+                Content="Authentifizierung :" 
+                Grid.Row="3" Grid.Column="0"  
+                Margin="5,2,0,0" 
+                Width="240" 
+                Height="50" 
+                FontSize="26"/>
+            <Label
+                Style="{StaticResource LabelStyle}" 
+                Content="Username :" 
+                Grid.Row="4" 
+                Grid.Column="0" 
+                Margin="5,2,0,0" 
+                Width="240" 
+                Height="50" 
+                FontSize="26"/>
+            <Label
+                Style="{StaticResource LabelStyle}" 
+                Content="Passwort :" 
+                Grid.Row="5" 
+                Grid.Column="0" 
+                Margin="5,2,0,0" 
+                Width="240" 
+                Height="50" 
+                FontSize="26"/>
+        <Label
+                Style="{StaticResource LabelStyle}" 
+                Content="Database" 
+                Grid.Row="6" 
+                Grid.Column="0" 
+                Margin="5,2,0,0" 
+                Width="240" 
+                Height="50" 
+                FontSize="26"/>
+        <ComboBox
+                Name="cmbAuthenticationType"
+                Width="250"
+                Height="30"
+                ItemsSource="{Binding  ListAuthentifizierung}"
+                Grid.Column="1" 
+                Grid.Row="3"
+                SelectionChanged="ComboBox_SelectionChanged"/>
+            <ComboBox 
+                Name="cmbServerTyp"
+                Text="{Binding Path=ServerType}"
+                Grid.Row="1" 
+                Grid.Column="1"
+                Width="250"
+                Height="30"
+                ItemsSource="{Binding ListServerTyp}"
+                IsEditable="True"/>
+            <ComboBox 
+                Text="{Binding Path=Servername}"
+                Name="CmbServername"
+                Grid.Row="2" 
+                Grid.Column="1"
+                Width="250"
+                Height="30"
+                ItemsSource="{Binding ListServerName}"
+                IsEditable="True"/>
+            <TextBox 
+                Text="{Binding Path=Username}"
+                Name="Username"             
+                Grid.Row="4"
+                Grid.Column="1" 
+                Style="{StaticResource TextBoxStyle}"
+                IsEnabled="{Binding SetEnable}"/>
+             <TextBox 
+                Text="{Binding Path=Passwort}"
+                Name="Passwort"             
+                Grid.Row="5"
+                Grid.Column="1" 
+                Style="{StaticResource TextBoxStyle}"
+                IsEnabled="{Binding SetEnable}"/>
+        <ComboBox 
+                Text="{Binding Path=CurrentDatabase}"
+                Name="Cmbdatabase"
+                Grid.Row="6" 
+                Grid.Column="1"
+                Width="250"
+                Height="30"
+                ItemsSource="{Binding ListOfDatabases}"
+                DropDownOpened="Cmbdatabase_DropDownOpened"
+                IsEditable="True"/>
+        <local:ucRoundButton 
+                Grid.Column="1" 
+                Grid.Row="7" 
+                CornerRadius="7" 
+                Width="120" 
+                Height="50" 
+                Content="Cancel" 
+                Background="RoyalBlue" 
+                Foreground="AliceBlue" 
+                BorderBrush="Gray" 
+                BorderThickness="2" 
+                HorizontalAlignment="Left" 
+                Margin="10,0,0,15" 
+                FontSize="18" 
+                Click="CancelButton_Click" Cursor="Hand" />
+           <local:ucRoundButton  
+                Grid.Column="1" 
+                Grid.Row="7" 
+                CornerRadius="7" 
+                Width="120" 
+                Height="50" 
+                Content="Save" 
+                Background="RoyalBlue" 
+                Foreground="AliceBlue" 
+                BorderBrush="Gray" 
+                BorderThickness="2" 
+                HorizontalAlignment="Right"
+                Margin="10,0,10,15" 
+                FontSize="18" 
+                Click="SaveButton_Click" 
+                Cursor="Hand"/>
+
+        </Grid>
+</Window>
